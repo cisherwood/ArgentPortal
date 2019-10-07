@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ArgentPortal.Areas.Identity;
 using ArgentPortal.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ArgentPortal
 {
@@ -31,6 +32,8 @@ namespace ArgentPortal
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -61,6 +64,8 @@ namespace ArgentPortal
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseMvcWithDefaultRoute();
 
             app.UseAuthentication();
             app.UseAuthorization();

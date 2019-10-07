@@ -4,194 +4,22 @@ using ArgentPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArgentPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190924191316_initialcommit")]
+    partial class initialcommit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ArgentPortal.Data.Card", b =>
-                {
-                    b.Property<int>("CardId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.HasKey("CardId");
-
-                    b.ToTable("Card");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardCategory", b =>
-                {
-                    b.Property<int>("CardCategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CardCategoryId");
-
-                    b.HasIndex("CardId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("CardCategory");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardDeck", b =>
-                {
-                    b.Property<int>("CardDeckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DeckId")
-                        .HasColumnType("int");
-
-                    b.Property<short>("Quantity")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("CardDeckId");
-
-                    b.HasIndex("CardId");
-
-                    b.HasIndex("DeckId");
-
-                    b.ToTable("CardDeck");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardEffect", b =>
-                {
-                    b.Property<int>("CardEffectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.HasKey("CardEffectId");
-
-                    b.HasIndex("CardId");
-
-                    b.ToTable("CardEffect");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardTag", b =>
-                {
-                    b.Property<int>("CardTagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CardTagId");
-
-                    b.HasIndex("CardId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("CardTag");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.Deck", b =>
-                {
-                    b.Property<int>("DeckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.HasKey("DeckId");
-
-                    b.ToTable("Deck");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.Tag", b =>
-                {
-                    b.Property<int>("TagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("TagId");
-
-                    b.ToTable("Tag");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -391,60 +219,6 @@ namespace ArgentPortal.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardCategory", b =>
-                {
-                    b.HasOne("ArgentPortal.Data.Card", "Card")
-                        .WithMany("CardCategories")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ArgentPortal.Data.Category", "Category")
-                        .WithMany("CardCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardDeck", b =>
-                {
-                    b.HasOne("ArgentPortal.Data.Card", "Card")
-                        .WithMany("CardDecks")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ArgentPortal.Data.Deck", "Deck")
-                        .WithMany("CardDecks")
-                        .HasForeignKey("DeckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardEffect", b =>
-                {
-                    b.HasOne("ArgentPortal.Data.Card", "Card")
-                        .WithMany("CardEffects")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ArgentPortal.Data.CardTag", b =>
-                {
-                    b.HasOne("ArgentPortal.Data.Card", "Card")
-                        .WithMany("CardTags")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ArgentPortal.Data.Tag", "Tag")
-                        .WithMany("CardTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
